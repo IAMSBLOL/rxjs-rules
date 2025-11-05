@@ -1,22 +1,43 @@
-import { useStore2 } from '@/store/index.store2'
 
-export const ListItemContent = () => {
-  const contentData = useStore2((s) => s.contentData)
+import { Button } from '@/components/ui/button'
+import type { DetailData } from '@/types'
+import { Loader } from 'lucide-react'
+
+interface Props {
+  data?: DetailData
+  onReflesh?: () => void
+  loading?: boolean
+}
+
+export const ListItemContent = (props: Props) => {
+  const { onReflesh, data, loading } = props
+
   return (
-    <div className="relative">
-
-      <div className="absolute inset-0 bg-linear-to-br from-cyan-500/10 to-blue-500/10 rounded-3xl blur-2xl">
+    <div className="p-4 border relative my-3">
+      <div>
+        详情：
         {
-          contentData?.id
+          data?.id
         }
       </div>
-
 
       <div className="relative bg-white/3 backdrop-blur-[2px] rounded-2xl border border-white/10 shadow-[0_8px_32px_0_rgba(255,255,255,0.1)] p-6">
         {
-          contentData?.content
+          data?.content
         }
       </div>
+      <Button
+        className='w-full cursor-pointer'
+        onClick={onReflesh}
+        disabled={!data?.id}
+      >
+        刷新
+        {
+          loading && (
+            <Loader className=' animate-spin' />
+          )
+        }
+      </Button>
     </div>
   )
 }

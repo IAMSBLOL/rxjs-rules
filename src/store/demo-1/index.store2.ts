@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { fetchDetails } from '../services'
-import type { DetailData } from '../types'
+import { fetchDetails } from '@/services'
+import type { DetailData } from '@/types'
 import { useStore1 } from './index.store1'
 
 interface Store {
@@ -13,6 +13,7 @@ interface Store {
   // actions
   setCurrentId: (str: string) => void
   setContentLoading: (str: boolean) => void
+
   fetchDetailsAction: (id?: string) => void
 }
 
@@ -34,6 +35,7 @@ export const useStore2 = create<Store>()(
             state.contentLoading = loading
           })
         },
+        //
         fetchDetailsAction: async (id?: string) => {
           try {
             if (id) {

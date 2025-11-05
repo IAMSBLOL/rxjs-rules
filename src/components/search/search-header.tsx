@@ -6,22 +6,27 @@ import {
 } from "@/components/ui/input-group"
 import { Search, Loader2Icon } from "lucide-react"
 import { Button } from '@/components/ui/button'
-import { useStore1 } from '@/store/index.store1'
 
-export const SearchHeader = () => {
-  const setSearchKey = useStore1((s) => s.setSearchKey)
-  const searchAndReload = useStore1((s) => s.searchAndReload)
-  const searchLoading = useStore1((s) => s.searchLoading)
+
+interface Props {
+  onSearch?: () => void
+  onInput?: (s: string) => void
+  loading?: boolean
+}
+
+export const SearchHeader = (props: Props) => {
+  const { onSearch, onInput, loading } = props
+
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchKey(e.target.value)
+    onInput?.(e.target.value)
   }
 
   const handleSearch = () => {
-    searchAndReload()
+    onSearch?.()
   }
   return (
-    <div className="px-8 py-4">
+    <div className="py-4">
       <InputGroup>
         <InputGroupInput placeholder="Search..." onChange={handleInput} />
         <InputGroupAddon>
@@ -32,7 +37,7 @@ export const SearchHeader = () => {
           <Button size="sm" onClick={handleSearch}>
             查询
             {
-              searchLoading && <Loader2Icon className=" animate-spin" />
+              loading && <Loader2Icon className=" animate-spin" />
             }
           </Button>
         </InputGroupAddon>

@@ -1,5 +1,4 @@
 import { ClosedCaptionIcon } from 'lucide-react'
-import { SearchHeader } from './components/search'
 import { Demo1 } from './components/demo-1'
 import { Demo2 } from './components/demo-2'
 import { Demo3 } from './components/demo-3'
@@ -16,7 +15,6 @@ function App() {
           zus & observable-hooks
         </span>
       </div>
-      <SearchHeader />
       <div className='grid py-5 sm:grid-cols-2 lg:grid-cols-3 @min-xs:grid-cols-1'>
         <Demo1 />
         <Demo2 />

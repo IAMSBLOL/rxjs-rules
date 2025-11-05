@@ -1,7 +1,7 @@
 import { create } from 'zustand'
 import { immer } from 'zustand/middleware/immer'
-import { fetchList } from '../services'
-import type { ListData } from '../types'
+import { fetchList } from '@/services'
+import type { ListData } from '@/types'
 import { isArray, isNil } from 'lodash-es'
 import { useStore2 } from './index.store2'
 

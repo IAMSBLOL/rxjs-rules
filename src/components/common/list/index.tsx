@@ -2,22 +2,35 @@
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Separator } from "@/components/ui/separator"
 import { Fragment } from 'react'
-import { useStore1 } from '@/store/index.store1'
+
+import type { ListData } from '@/types'
+import { cn } from "@/lib/utils"
+interface Props {
+  data: ListData[]
+  activeId?: string
+  onSelect?: (d: ListData) => void
+}
+export const List = (props: Props) => {
+  const { data, activeId, onSelect } = props
 
 
-export const List = () => {
-  const listData = useStore1((s) => (s.listData))
-  const handleClick = () => {
-    //
-  }
   return (
     <ScrollArea className="h-72 w-full rounded-md border">
       <div className="p-4">
         <h4 className="mb-4 text-sm leading-none font-medium">List</h4>
-        {listData?.map((tag) => (
+        {data?.map((tag) => (
           <Fragment key={tag.id}>
-            <div className="py-2 cursor-pointer" onClick={handleClick}>
-              <div className="text-sm text-gray-800">{tag.id}{tag.searchKey}</div>
+            <div
+              className={
+                cn(
+                  "py-2 cursor-pointer text-gray-800",
+                  {
+                    "text-blue-500": activeId === tag.id
+                  }
+                )
+              }
+              onClick={() => onSelect?.(tag)}>
+              <div className="text-sm">{tag.id}{tag.searchKey}</div>
             </div>
             <Separator />
           </Fragment>

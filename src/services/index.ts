@@ -1,4 +1,5 @@
 import type { FetchListData, FetchDetailData, ListData, DetailData } from '../types'
+import dayjs from 'dayjs'
 
 const getListResult = (data: FetchListData) => {
   return Array.from({ length: 10 }).fill('fetchList').map((_o, i) => {
@@ -27,7 +28,7 @@ export const fetchDetails = async (data: FetchDetailData) => {
       const timer = setTimeout(() => {
         resolve({
           ...data,
-          content: `我是i:${data.id}的最新内容${new Date().getUTCDate()}`
+          content: `我是i:${data.id}的最新内容 | 时间：${dayjs().format("YYYY-MM-DD HH:mm:ss")}`
         })
         clearTimeout(timer)
       }, 1000)
