@@ -55,6 +55,7 @@ const Demo3ListItemContent = () => {
 
 export const Demo3 = () => {
   useListEpic()
+  console.log('Demo3')
   return (
     <Container>
       <Header>Demo-3:observable-hooks</Header>

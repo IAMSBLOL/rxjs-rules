@@ -38,7 +38,7 @@ const Demo2List = () => {
 const Demo2ListItemContent = () => {
   const contentData = useStore2((s) => s.contentData)
   const contentLoading = useStore2((s) => s.contentLoading)
-    const { fetchDetailsFn } = useContent()
+  const { fetchDetailsFn } = useContent()
 
   const handleReflesh = () => {
     fetchDetailsFn()
@@ -49,6 +49,9 @@ const Demo2ListItemContent = () => {
 }
 
 export const Demo2 = () => {
+
+   useContent()
+   console.log('Demo2')
 
   return (
     <Container>

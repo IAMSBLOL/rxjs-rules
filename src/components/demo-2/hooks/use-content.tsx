@@ -7,6 +7,7 @@ export const useContent = () => {
   const {
     setContentData,
     setContentLoading,
+    currentId
   } = useStore2(
     useShallow(
       (s) => (
@@ -18,6 +19,8 @@ export const useContent = () => {
       )
     )
   )
+
+  console.log(currentId)
 
   const fetchDetailsFn = useCallback(async (id?: string) => {
     try {

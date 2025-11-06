@@ -1,6 +1,6 @@
 
 import { useStore1 } from '@/store/demo-2/index.store1'
-
+import { useStore2 } from '@/store/demo-2/index.store2'
 import { fetchList } from '@/services'
 import { useCallback } from 'react'
 import { useShallow } from 'zustand/react/shallow'
@@ -27,10 +27,13 @@ export const useList = () => {
   const fetchListFn = useCallback(async (str?: string) => {
     try {
       setSearchLoading(true)
+      useStore2.getState().setContentLoading(true)
       const res = await fetchList({ searchKey: str || useStore1.getState().searchKey })
       setListData(res)
       if (res[0]) {
-        await fetchDetailsFn(res[0].id)
+        const id = res[0].id!
+        useStore2.getState().setCurrentId(id)
+        await fetchDetailsFn(id)
       }
       setSearchLoading(false)
     } catch (e) {

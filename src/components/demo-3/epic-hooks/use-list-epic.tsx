@@ -1,5 +1,6 @@
 import { fetchListTrigger$, fetchDetailsTrigger$ } from '@/store/demo-3/subject'
 import { useStore1 } from '@/store/demo-3/index.store1'
+import { useStore2 } from '@/store/demo-3/index.store2'
 import { fetchList } from '@/services'
 import { from, map, withLatestFrom, debounceTime, catchError, startWith, endWith, of, switchMap, } from 'rxjs'
 import type { Observable } from 'rxjs'
@@ -77,6 +78,7 @@ export const useListEpic = () => {
 
       if (data.type === 'start-fetch') {
         setSearchLoading(true)
+        useStore2.getState().setContentLoading(true)
       }
 
       if (data.type === 'end-fetch') {

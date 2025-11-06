@@ -9,12 +9,14 @@ import { useShallow } from 'zustand/react/shallow'
 export const useContentEpic = () => {
   const {
     setContentLoading,
-    setContentData
+    setContentData,
+    setCurrentId
   } = useStore2(
     useShallow(
       (s) => ({
         setContentData: s.setContentData,
-        setContentLoading: s.setContentLoading
+        setContentLoading: s.setContentLoading,
+        setCurrentId: s.setCurrentId
       })
     )
   )
@@ -22,12 +24,15 @@ export const useContentEpic = () => {
   const sub$ = useMemo(
     () => {
       return fetchDetailsTrigger$.pipe(
-        tap(()=>{
+        tap(() => {
           console.log('262626')
         }),
         debounceTime(100),
         switchMap((id) => {
           setContentLoading(true)
+          if(id) {
+            setCurrentId(id)
+          }
           return from(fetchDetails({ id: id || useStore2.getState().currentId })).pipe(
             map((s) => {
               setContentData(s)
@@ -45,7 +50,7 @@ export const useContentEpic = () => {
           )
         })
       )
-    }, [setContentData, setContentLoading]
+    }, [setContentData, setContentLoading, setCurrentId]
   )
 
   useSubscription(sub$)
