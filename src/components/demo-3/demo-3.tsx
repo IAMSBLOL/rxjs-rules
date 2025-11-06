@@ -1,4 +1,4 @@
-import { List, Description, Header, Container, ListItemContent } from '../common'
+import { List, Header, Container, ListItemContent } from '../common'
 import { useStore1 } from '@/store/demo-3/index.store1'
 import { useStore2 } from '@/store/demo-3/index.store2'
 import { fetchListTrigger$, fetchDetailsTrigger$ } from '@/store/demo-3/subject'
@@ -66,9 +66,7 @@ export const Demo3 = () => {
     <Container>
       <EpicHooks />
       <Header>Demo-3:observable-hooks</Header>
-      <Description>
-        demo-2的优点这个方案也有，而且逻辑内聚（组件颗粒度可以非常小），无额外状态副作用、内存开销。缺点是需要引入rxjs，订阅模式。
-      </Description>
+
       <Demo3SearchHeader />
       <Demo3List />
       <Demo3ListItemContent />

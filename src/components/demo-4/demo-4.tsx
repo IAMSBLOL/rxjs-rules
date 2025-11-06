@@ -1,4 +1,4 @@
-import { List, Description, Header, Container, ListItemContent } from '../common'
+import { List, Header, Container, ListItemContent } from '../common'
 import { useStore1 } from '@/store/demo-4/index.store1'
 import { useStore2 } from '@/store/demo-4/index.store2'
 
@@ -73,10 +73,6 @@ export const Demo4 = () => {
     <Container>
       <EpicHooks />
       <Header>Demo-4:effect ts</Header>
-      <Description>
-        函数式+描述业务，通过run-xxx驱动业务蓝图，而且比demo-3的约束更强。但是很遗憾的是，它是自带体系的，针对数据处理确实非常棒。
-        但在浏览器环境中难以发挥实力。并且门槛比方案3高。编程思维需要改变，团队协作是个问题。
-      </Description>
       <Demo4SearchHeader />
       <Demo4List />
       <Demo4ListItemContent />

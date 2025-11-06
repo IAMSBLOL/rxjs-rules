@@ -1,4 +1,4 @@
-import { List, Description, Header, Container, ListItemContent } from '../common'
+import { List, Header, Container, ListItemContent } from '../common'
 import { useStore1 } from '@/store/demo-2/index.store1'
 import { useStore2 } from '@/store/demo-2/index.store2'
 import { SearchHeader } from '@/components/search'
@@ -56,9 +56,6 @@ export const Demo2 = () => {
   return (
     <Container>
       <Header>Demo-2: React Hooks</Header>
-      <Description>
-        优点是可复用，逻辑内聚在组件内，缺点是跨组件调用时，带来非必要的状态变更和内存开销，一旦逻辑足够复杂，依然不可避免走向demo-1的弊端。
-      </Description>
       <Demo2SearchHeader />
       <Demo2List />
       <Demo2ListItemContent />
