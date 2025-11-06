@@ -4,8 +4,8 @@ interface Props {
 
 export const Description = (props:Props)=>{
   return (
-    <div className="px-8 py-3 text-xs text-gray-500">
+    <pre className="px-8 py-3 text-xs text-gray-500 whitespace-pre-wrap">
       {props.children}
-    </div>
+    </pre>
   )
 }

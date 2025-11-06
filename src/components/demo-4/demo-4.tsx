@@ -1,32 +1,38 @@
 import { List, Description, Header, Container, ListItemContent } from '../common'
-import { useStore1 } from '@/store/demo-3/index.store1'
-import { useStore2 } from '@/store/demo-3/index.store2'
-import { fetchListTrigger$, fetchDetailsTrigger$ } from '@/store/demo-3/subject'
+import { useStore1 } from '@/store/demo-4/index.store1'
+import { useStore2 } from '@/store/demo-4/index.store2'
+
+import { useList } from './effect-hooks/use-list.effect'
+import { useContent } from './effect-hooks/use-content.effect'
 import { SearchHeader } from '@/components/search'
-import { useListEpic } from './epic-hooks/use-list-epic'
-import { useContentEpic } from './epic-hooks/use-content-epic'
+
 import type { ListData } from '@/types'
 
-const Demo3SearchHeader = () => {
+const Demo4SearchHeader = () => {
   const setSearchKey = useStore1((s) => s.setSearchKey)
   const searchLoading = useStore1((s) => s.searchLoading)
+  const searchKey = useStore1((s) => s.searchKey)
+
+  const { getList } = useList()
 
   const handleSearch = () => {
-    fetchListTrigger$.next()
+    getList(searchKey)
   }
   return (
     <SearchHeader loading={searchLoading} onInput={setSearchKey} onSearch={handleSearch} />
   )
 }
 
-const Demo3List = () => {
+const Demo4List = () => {
 
   const listData = useStore1((s) => (s.listData))
   const setCurrentId = useStore2((s) => s.setCurrentId)
   const currentId = useStore2((s) => s.currentId)
+  const { getContent } = useContent()
   const handleSelect = (data: ListData) => {
     setCurrentId(data.id!)
-    fetchDetailsTrigger$.next(data.id)
+    // fetchDetailsTrigger$.next(data.id)
+    getContent(data.id!)
   }
 
   return (
@@ -38,14 +44,15 @@ const Demo3List = () => {
   )
 }
 
-const Demo3ListItemContent = () => {
-
+const Demo4ListItemContent = () => {
+  const { getContent } = useContent()
 
   const contentData = useStore2((s) => s.contentData)
   const contentLoading = useStore2((s) => s.contentLoading)
 
   const handleReflesh = () => {
-    fetchDetailsTrigger$.next()
+    // fetchDetailsTrigger$.next()
+    getContent()
   }
 
   return (
@@ -54,24 +61,25 @@ const Demo3ListItemContent = () => {
 }
 
 const EpicHooks = () => {
-  useListEpic()
-  useContentEpic()
+  // useListEpic()
+  // useContentEpic()
   return null
 }
 
-export const Demo3 = () => {
+export const Demo4 = () => {
   // useListEpic()
-  console.log('Demo3')
+  console.log('Demo4')
   return (
     <Container>
       <EpicHooks />
-      <Header>Demo-3:observable-hooks</Header>
+      <Header>Demo-4:effect ts</Header>
       <Description>
-        demo-2的优点这个方案也有，而且逻辑内聚（组件颗粒度可以非常小），无额外状态副作用、内存开销。缺点是需要引入rxjs，订阅模式。
+        函数式+描述业务，通过run-xxx驱动业务蓝图，而且比demo-3的约束更强。但是很遗憾的是，它是自带体系的，针对数据处理确实非常棒。
+        但在浏览器环境中难以发挥实力。并且门槛比方案3高。编程思维需要改变，团队协作是个问题。
       </Description>
-      <Demo3SearchHeader />
-      <Demo3List />
-      <Demo3ListItemContent />
+      <Demo4SearchHeader />
+      <Demo4List />
+      <Demo4ListItemContent />
     </Container>
   )
 }

@@ -53,8 +53,7 @@ export const Demo1 = () => {
     <Container>
       <Header>Demo-1:all in store</Header>
       <Description>
-        异步逻辑全部all in store, 即使拆分slice、action。
-        优点是无额外内存开销。缺点是跨组件、store时，逻辑会非常冗余，并且异步逻辑无法复用。
+        优点:无额外内存开销。缺点:跨组件、store时，逻辑会非常冗余，并且异步逻辑无法复用。当业务比较复杂时，store会非常混乱。
       </Description>
       <Demo1SearchHeader />
       <Demo1List />
